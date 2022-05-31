@@ -6,75 +6,72 @@
 #    By: yboudoui <yboudoui@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/02 13:40:44 by yboudoui          #+#    #+#              #
-#    Updated: 2022/03/09 00:48:19 by yboudoui         ###   ########.fr        #
+#    Updated: 2022/05/31 10:25:52 by yboudoui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC_DIR		=	./srcs/
+NAME				=	libftprintf.a
 
-HEAD_DIR	=	./includes/
+UTILS_DIR			=	utils/
 
-SRCS		=	${SRC_DIR}ft_atoi.c\
-				${SRC_DIR}ft_bzero.c\
-				${SRC_DIR}ft_isalnum.c\
-				${SRC_DIR}ft_isalpha.c\
-				${SRC_DIR}ft_isascii.c\
-				${SRC_DIR}ft_isdigit.c\
-				${SRC_DIR}ft_isprint.c\
-				${SRC_DIR}ft_memchr.c\
-				${SRC_DIR}ft_memcmp.c\
-				${SRC_DIR}ft_memmove.c\
-				${SRC_DIR}ft_memcpy.c\
-				${SRC_DIR}ft_memset.c\
-				${SRC_DIR}ft_calloc.c\
-				${SRC_DIR}ft_strchr.c\
-				${SRC_DIR}ft_strlcat.c\
-				${SRC_DIR}ft_strlcpy.c\
-				${SRC_DIR}ft_strlen.c\
-				${SRC_DIR}ft_strdup.c\
-				${SRC_DIR}ft_strncmp.c\
-				${SRC_DIR}ft_strnstr.c\
-				${SRC_DIR}ft_strrchr.c\
-				${SRC_DIR}ft_tolower.c\
-				${SRC_DIR}ft_toupper.c\
-				${SRC_DIR}ft_substr.c\
-				${SRC_DIR}ft_strjoin.c\
-				${SRC_DIR}ft_strtrim.c\
-				${SRC_DIR}ft_split.c\
-				${SRC_DIR}ft_itoa.c\
-				${SRC_DIR}ft_strmapi.c\
-				${SRC_DIR}ft_striteri.c\
-				${SRC_DIR}ft_putchar_fd.c\
-				${SRC_DIR}ft_putstr_fd.c\
-				${SRC_DIR}ft_putendl_fd.c\
-				${SRC_DIR}ft_putnbr_fd.c
+UTILS_FILES_HEADER	=	utils.h
 
+UTILS_FILES_SRC		=	ft_itoa_base.c\
+						ft_strlen.c
 
-HEAD		=	${HEAD_DIR}lib_ft.h
+UTILS_HEADER		=	$(addprefix $(UTILS_DIR), $(UTILS_FILES_HEADER))
 
-OBJS		=	${SRCS:.c=.o}
+UTILS_SRC			=	$(addprefix $(UTILS_DIR), $(UTILS_FILES_SRC))
 
-NAME		=	libft.a
+UTILS_OBJS			=	$(UTILS_SRC:.c=.o)
 
-CC			=	gcc
+TYPES_DIR			=	types/
 
-RM			=	rm -f
+TYPES_FILES_HEADER	=	types.h
 
-CFLAGS		=	-Wall -Wextra -Werror
+TYPES_FILES_SRC		=	ft_init.c\
+						ft_char.c\
+						ft_int.c\
+						ft_ptr.c\
+						ft_str.c\
+						ft_uint.c\
+						ft_uint_hex_maj.c\
+						ft_uint_hex_min.c\
+						ft_default.c\
+						ft_percentage.c
+
+TYPES_HEADER		=	$(addprefix $(TYPES_DIR), $(TYPES_FILES_HEADER))
+
+TYPES_SRC			=	$(addprefix $(TYPES_DIR), $(TYPES_FILES_SRC))
+
+TYPES_OBJS			=	$(TYPES_SRC:.c=.o)
+
+DIR					=	
+FILES_HEADER		=	ft_printf.h
+FILES_SRC			=	ft_printf.c
+SRC					=	$(addprefix $(DIR), $(FILES_SRC))
+HEADER				=	$(addprefix $(DIR), $(FILES_HEADER))
+OBJS				=	$(SRC:.c=.o)
+
+CC					=	gcc
+
+CFLAGS				=	-Wall -Wextra -Werror -g3
+
+RM					=	rm -f
 
 .c.o:
-			${CC} ${CFLAGS} -I${HEAD_DIR} -c $< -o ${<:.c=.o}
+			$(CC) $(CFLAGS)  -c $< -o $(<:.c=.o)
 
-$(NAME):	${OBJS}
-			ar -rc libft.a ${OBJS}
+$(NAME):	$(UTILS_OBJS) $(TYPES_OBJS) $(OBJS)
+				ar rcs $(NAME) $(UTILS_OBJS) $(TYPES_OBJS) $(OBJS)
 
-all:		${NAME}
+all:		$(NAME)
 
 clean:
-			${RM} ${OBJS}
+				$(RM) $(UTILS_OBJS) $(TYPES_OBJS) $(OBJS)
 
 fclean:		clean
-			${RM} ${NAME}
+				$(RM) $(NAME)
 
 re:			fclean all
 

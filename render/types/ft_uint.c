@@ -1,20 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_uint_maj_hex_handler.c                          :+:      :+:    :+:   */
+/*   ft_uint.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yboudoui <yboudoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/12 14:56:01 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/05/12 10:39:21 by yboudoui         ###   ########.fr       */
+/*   Created: 2022/03/12 14:52:11 by yboudoui          #+#    #+#             */
+/*   updated: 2022/05/26 09:54:58 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-t_handler_output	ft_uint_maj_hex_handler(va_list data)
-{
-	unsigned int	*ptr;
-	char			*output;
+#include "types.h"
 
-	output = ft_itoa_base(*ptr, "0123456789ABCDEF");
-	return (output);
+size_t	ft_uint(const char *str, va_list *arg)
+{
+	unsigned int	data;
+	char			*output;
+	size_t			len;
+
+	(void)str;
+	data = va_arg(*arg, unsigned int);
+	output = ft_itoa_base(0, data, "0123456789");
+	len = ft_strlen(output);
+	write(1, output, len);
+	free(output);
+	return (len);
 }

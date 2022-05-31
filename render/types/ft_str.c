@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libftprintf.h                                      :+:      :+:    :+:   */
+/*   ft_str.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yboudoui <yboudoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/12 12:58:48 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/05/16 15:35:37 by yboudoui         ###   ########.fr       */
+/*   Created: 2022/03/12 14:51:30 by yboudoui          #+#    #+#             */
+/*   Updated: 2022/05/26 15:29:20 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFTPRINTF_H
-# define LIBFTPRINTF_H
+#include "types.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdarg.h>
-
-typedef struct	s_str {
-	char	*start;
+size_t	ft_str(const char *str, va_list *arg)
+{
+	char	*data;
 	size_t	len;
-}	t_str;
 
-typedef char *(t_flag_handler)(void*);
-typedef t_str (t_format_handler)(char **);
-
-int	ft_printf(const char *format, ...);
-
-#endif
+	(void)str;
+	data = va_arg(*arg, char *);
+	len = ft_strlen(data);
+	write(1, data, len);
+	return (len);
+}

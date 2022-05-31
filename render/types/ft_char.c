@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ptr_handler.c                                   :+:      :+:    :+:   */
+/*   ft_char.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yboudoui <yboudoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/12 14:50:34 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/05/12 10:39:21 by yboudoui         ###   ########.fr       */
+/*   Created: 2022/03/12 14:40:32 by yboudoui          #+#    #+#             */
+/*   Updated: 2022/05/26 15:39:33 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-t_handler_output	ft_ptr_handler(va_list data)
+#include "types.h"
+
+size_t	ft_char(const char *str, va_list *arg)
 {
-	long	*ptr;
-	char	*output;
+	char	data;
 
-	ptr = data;
-
-	return (output);
+	(void)str;
+	data = (char)va_arg(*arg, int);
+	return (write(1, &data, 1));
 }

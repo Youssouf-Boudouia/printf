@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_uint_handler.c                                  :+:      :+:    :+:   */
+/*   ft_percentage.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yboudoui <yboudoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/12 14:52:11 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/05/12 10:39:21 by yboudoui         ###   ########.fr       */
+/*   Created: 2022/05/26 10:58:32 by yboudoui          #+#    #+#             */
+/*   Updated: 2022/05/26 15:28:22 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-t_handler_output	ft_uint_handler(va_list data)
-{
-	unsigned int	*ptr;
-	char			*output;
+#include "types.h"
 
-	ptr = data;
-	output = ft_itoa(*ptr);
-	return (output);
+size_t	ft_percentage(const char *str, va_list *arg)
+{
+	(void)str;
+	(void)arg;
+	return (write(1, "%", 1));
 }

@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_char_handler.c                                  :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yboudoui <yboudoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/12 14:40:32 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/05/12 10:39:21 by yboudoui         ###   ########.fr       */
+/*   Created: 2022/05/26 09:49:08 by yboudoui          #+#    #+#             */
+/*   Updated: 2022/05/26 09:50:22 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lib_handler.h"
+#include "utils.h"
 
-t_handler_output	ft_char_handler(va_list data)
+size_t	ft_strlen(const char *str)
 {
-	char	*ptr;
-	char	output[2];
+	size_t	len;
 
-	ptr = data;
-	output[0] = ptr[0]
-	output[1] = 0;
-	return output;
+	len = 0;
+	while (str[len])
+		len++;
+	return (len);
 }
