@@ -1,31 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_init.c                                          :+:      :+:    :+:   */
+/*   flags.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/26 13:53:16 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/05/26 18:46:37 by yboudoui         ###   ########.fr       */
+/*   Created: 2022/06/07 07:37:58 by yboudoui          #+#    #+#             */
+/*   Updated: 2022/06/11 12:22:55 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "types.h"
+#ifndef FLAGS_H
+# define FLAGS_H
 
-void	ft_init(t_handler handlers[128])
-{
-	int	size;
+# include "../ft_format.h"
 
-	size = 128;
-	while (--size)
-		handlers[size] = &ft_default;
-	handlers['c'] = &ft_char;
-	handlers['s'] = &ft_str;
-	handlers['p'] = &ft_ptr;
-	handlers['d'] = &ft_int;
-	handlers['i'] = &ft_int;
-	handlers['u'] = &ft_uint;
-	handlers['x'] = &ft_uint_hex_min;
-	handlers['X'] = &ft_uint_hex_maj;
-	handlers['%'] = &ft_percentage;
-}
+void	ft_handle_sign(t_format *, __int128_t *, t_str **);
+void	ft_handle_zero(t_format *, __int128_t *, t_str **);
+void	ft_handle_width(t_format *, t_str **);
+
+t_str	*ft_scalar_data(t_format *, __int128_t *, char *, char *);
+
+# endif

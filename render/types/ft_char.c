@@ -6,17 +6,32 @@
 /*   By: yboudoui <yboudoui@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 14:40:32 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/05/26 15:39:33 by yboudoui         ###   ########.fr       */
+/*   Updated: 2022/06/14 00:50:58 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "types.h"
 
-size_t	ft_char(const char *str, va_list *arg)
+static t_str	*ft_lol(t_format *fmt, t_str *out)
 {
-	char	data;
+	if (!fmt->format.precision)
+	{
+		ft_delete_str(out);
+		out = ft_create_tstr("");
+	}
+	ft_handle_zero(fmt, NULL, &out);
+	ft_handle_sign(fmt, NULL, &out);
+	ft_handle_width(fmt, &out);
+	return (out);
+}
 
-	(void)str;
-	data = (char)va_arg(*arg, int);
-	return (write(1, &data, 1));
+t_str	*ft_char(void *format)
+{
+	t_format	*fmt;
+	t_str		*out;
+
+	fmt = format;
+	out = ft_create_tstr(" ");
+	out->str[0] = va_arg(*fmt->input->arg, int);
+	return (ft_lol(format, out));
 }

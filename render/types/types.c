@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_int.c                                           :+:      :+:    :+:   */
+/*   types.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yboudoui <yboudoui@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/12 14:45:44 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/05/30 18:55:26 by yboudoui         ###   ########.fr       */
+/*   Created: 2022/06/14 00:44:18 by yboudoui          #+#    #+#             */
+/*   Updated: 2022/06/14 00:49:48 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "types.h"
 
-size_t	ft_int(const char *str, va_list *arg)
-{
-	int		data;
-	char	*output;
-	size_t	len;
-
-	(void)str;
-	data = va_arg(*arg, int);
-	output = ft_itoa_base(0, data, "0123456789");
-	len = ft_strlen(output);
-	write(1, output, len);
-	free(output);
-	return (len);
-}
+const t_handler	g_handler_list[128] = {
+[0] = ft_nofmt,
+['c'] = &ft_char,
+['s'] = &ft_str,
+['p'] = &ft_ptr,
+['d'] = &ft_int,
+['i'] = &ft_int,
+['u'] = &ft_uint,
+['x'] = &ft_uint_hex_min,
+['X'] = &ft_uint_hex_maj,
+['%'] = &ft_percentage,
+	&ft_default,
+};

@@ -5,18 +5,33 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yboudoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/26 13:25:56 by yboudoui          #+#    #+#             */
-/*   Updated: 2022/05/26 16:18:20 by yboudoui         ###   ########.fr       */
+/*   Created: 2022/06/02 23:05:50 by yboudoui          #+#    #+#             */
+/*   Updated: 2022/06/14 00:51:11 by yboudoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "types.h"
 
-size_t	ft_default(const char *str, va_list *arg)
+t_str	*ft_default(void *format)
 {
-	char	*out;
+	t_format	*fmt;
+	char		*str;
 
-	(void)arg;
-	out = (char[2]){'%', *str};
-	return (write(1, out, 2));
+	fmt = format;
+	str = ft_substr(*fmt->input->fmt, 0, fmt->fork_index);
+	return (ft_new_tstr(str));
+}
+
+t_str	*ft_nofmt(void *format)
+{
+	t_format	*fmt;
+	char		*str;
+
+	fmt = format;
+	fmt->fork_index = 0;
+	while ((*fmt->input->fmt)[fmt->fork_index]
+			&& (*fmt->input->fmt)[fmt->fork_index] != '%')
+		fmt->fork_index++;
+	str = ft_substr((*fmt->input->fmt), 0, fmt->fork_index);
+	return (ft_new_tstr(str));
 }
